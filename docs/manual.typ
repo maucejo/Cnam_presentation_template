@@ -313,7 +313,7 @@ Le modèle est en cours de développement. Voici la liste des fonctionnalités q
 
 - [x] Personnalisation de l'en-tête des diapositives standard avec l'affichage du titre de la diapositive et du nom section courante
 - [x] Personnalisation du pied de page (logo, titre court de la présentation, numérotation des diapositives)
-- [ ] Numérotation des diapositives d'annexe en lettre + chiffres (A.1, par exemple) ?
+- [x] Numérotation des diapositives d'annexe en lettre + chiffres (A | 1/1)
 
 *Éléments de contenu*
 
