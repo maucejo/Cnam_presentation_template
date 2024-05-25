@@ -1,4 +1,4 @@
-#import "../template/pres-template.typ": *
+#import "../pres-template.typ": *
 #import "./manual-template.typ": *
 
 #show: manual-template.with(
