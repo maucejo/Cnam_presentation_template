@@ -249,7 +249,8 @@
     fill: colors.gray.lighten(color-config.lighten-perc-gray),
   )
 
-  show math.equation: set text(font: math-font, weight: config.weight)
+  let math-fonts = (math-font, "New Computer Modern Math")
+  show math.equation: set text(font: math-fonts, weight: config.weight)
   set list(marker: [#text(fill:colors.red, size: 1.75em)[#sym.bullet]])
   set enum(numbering: n => text(fill:colors.red)[#n.])
 

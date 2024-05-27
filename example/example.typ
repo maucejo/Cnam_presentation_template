@@ -21,7 +21,7 @@ Conservatoire National des Arts et Métiers
 #show: pres-template.with(
   // aspect-ratio: "4-3",
   // font: "New Computer Modern Sans",
-  // math-font: "Fira Math",
+  // math-font: "New Computer Modern Math",
   lang: "fr",
 )
 
