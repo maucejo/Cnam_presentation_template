@@ -71,13 +71,14 @@
   })
   set page(paper: "a4", numbering: "1/1", header: header)
   set par(justify: true)
-  set text(lang: "fr", font: "Noto Sans", size: 11pt)
+  set text(lang: "fr", font: "Lato", size: 11pt)
+  show math.equation: set text(font: "Lete Sans Math")
 
   set heading(numbering: "1.1.")
 
   set list(indent: 2em)
 
-  show raw: set text(font: "Noto Sans Mono", size: 11pt)
+  show raw: set text(font: "Liberation Mono", size: 11pt)
 
   // Figures
   show figure.where(kind: image): set figure(numbering: "1", supplement: "Figure", gap: 1.5em)

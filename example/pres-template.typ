@@ -9,20 +9,13 @@
   weight: "regular",       // Font weight
   text-size: 20pt,         // Text size
   box-text-size: 0.8em,    // Box text size
-  logo-height: 25%,        // Logo height
-)
-
-// Colors lighten/darken percentages
-#let color-config = (
-  lighten-perc-red: 0%,    // Lighten percentage for red
-  lighten-perc-gray: 85%,  // Lighten percentage for gray
-  darken-perc-gray: 15%,   // Darken percentage for gray
+  logo-height: 22%,        // Logo height
 )
 
 // Colors
 #let colors = (
-  red: rgb("#c1002a").lighten(color-config.lighten-perc-red),
-  gray: rgb("#dddddd"),
+  red: rgb("#c1002a"),
+  gray: rgb("#405a68"),
   green: rgb(31, 136, 61),
   blue: rgb(9, 105, 218),
   purple: rgb(130, 80, 223),
@@ -47,10 +40,10 @@
 #let boxeq(body) = {
   set align(center)
   box(
-    stroke: 1pt + colors.gray.darken(color-config.darken-perc-gray),
+    stroke: 1pt + colors.gray.lighten(20%),
     radius: 5pt,
     inset: 0.5em,
-    fill: colors.gray,
+    fill: colors.gray.lighten(80%),
   )[#body]
 }
 //-----------------------------------------------------------------------
@@ -221,7 +214,7 @@
     grid(
       columns: (ratio*100%, 1fr),
       cell(fill: colors.red),
-      cell(fill: colors.gray.darken(color-config.darken-perc-gray))
+      cell(fill: colors.gray.lighten(40%))
     )
   }
 }
@@ -231,14 +224,14 @@
 #let pres-template(
   aspect-ratio: "16-9",
   lang: "fr",
-  logo: "../images/logo_cnam.png",
-  footer-logo: "../images/logo_cnam.png",
-  font: "Noto Sans",
-  math-font: "Noto Sans Math",
+  logo: "images/logo_cnam_lmssc.png",
+  footer-logo: "images/lecnam.png",
+  font: "Lato",
+  math-font: "Lete Sans Math",
   body
 ) = {
   set text(font: font, weight: config.weight, size: config.text-size, number-type: "lining", lang: lang)
-  set strong(delta: 175)
+  set strong(delta: 200)
   set par(justify: true)
 
   set page(
@@ -246,12 +239,11 @@
     margin: 0em,
     header: none,
     footer: none,
-    fill: colors.gray.lighten(color-config.lighten-perc-gray),
+    fill: colors.gray.lighten(95%),
   )
 
-  let math-fonts = (math-font, "New Computer Modern Math")
-  show math.equation: set text(font: math-fonts, weight: config.weight)
-  set list(marker: [#text(fill:colors.red, size: 1.75em)[#sym.bullet]])
+  show math.equation: set text(font: math-font, weight: config.weight, stylistic-set: 1)
+  set list(marker: ([#text(fill:colors.red)[#sym.bullet]], [#text(fill:colors.red)[#sym.triangle.filled.small.r]]))
   set enum(numbering: n => text(fill:colors.red)[#n.])
 
   states.mlogo.update(logo)
@@ -292,14 +284,15 @@
         }
       }
 
+      v(1em)
       line(length: 100%, stroke: 0.15em + colors.red)
-      text(size: 1.75em, strong(title))
+      text(size: 1.75em, strong(title, delta: 300))
       line(length: 100%, stroke: 0.15em + colors.red)
 
       v(0.5em)
       if author != none {
         set text(size: 1em)
-        block(spacing: 1em, strong(author))
+        block(spacing: 1em, strong(author, delta: 250))
       }
       if laboratory != none {
         set text(size: 0.85em)
@@ -321,9 +314,9 @@
       show: cell.with(fill: colors.red, inset: 1em)
       set align(horizon)
       set text(fill: white, size: 1.25em)
-      strong(title)
+      strong(delta: 225, title)
       h(1fr)
-      text(size: 0.75em, strong(utils.current-section))
+      text(size: 0.75em, strong(utils.current-section, delta: 205))
     } else { [] }
   }
 
@@ -338,13 +331,13 @@
     context{
       let logo = states.flogo.at(here())
       let title = states.stitle.at(here())
-      v(-2em)
-      pad(left: 1em, image(logo, height: 300%))
+      v(-1.55em)
+      pad(left: 1em, image(logo, height: 200%))
 
       if title != none {
-        set align(bottom + center)
-        v(-2.85em)
-        text(fill: colors.red, strong(title))
+        set align(horizon + center)
+        v(-2.35em)
+        text(fill: colors.red, strong(title, delta: 155))
       }
     }
 
@@ -379,6 +372,7 @@
     show: cell.with(fill: colors.red, inset: 1em)
     set align(horizon)
     set text(fill: white, size: 1.2em)
+    set strong(delta: 300)
     context{
       let lang = states.plang.at(here())
       if lang == "fr" {
@@ -395,8 +389,9 @@
   )
 
   set align(horizon)
+  set enum(spacing: 2em)
   show: pad.with(2em)
-  utils.polylux-outline(enum-args: (tight: false,))
+  text(size: 1.2em, strong(utils.polylux-outline(enum-args: (tight: false, )), delta: 200))
 }
 
 // New section slide - Uncounted slide
@@ -419,6 +414,7 @@
 // Focus slide - Uncounted slide
 #let focus-slide(body) = {
   set page(fill:colors.red, margin: 2em)
+  set strong(delta: 155)
   set text(fill: white, size: 2em)
   logic.polylux-slide(align(horizon + center, strong(body)))
   logic.logical-slide.update(i => i - 1)
@@ -454,12 +450,12 @@
     context{
       let logo = states.flogo.at(here())
       let title = states.stitle.at(here())
-      v(-2em)
-      pad(left: 1em, image(logo, height: 300%))
+      v(-1.55em)
+      pad(left: 1em, image(logo, height: 200%))
 
       if title != none {
         set align(bottom + center)
-        v(-2.85em)
+        v(-2.35em)
         text(fill: colors.red, strong(title))
       }
     }

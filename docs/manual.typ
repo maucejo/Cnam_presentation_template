@@ -4,7 +4,7 @@
 #show: manual-template.with(
 	title: " Modèle de présentation Typst",
 	subtitle: "Présentations de type Beamer en Typst",
-	abstract : [Ce package Typst est une proposition de modèle de présentation de type Beamer en Typst pour les personnels du Laboratoire de Mécanique des Structures et des Systèmes Couplés du Conservatoire National des Arts et Métiers.]
+	abstract : [Ce package Typst est une proposition de modèle de présentation de type Beamer en Typst pour les personnels du Laboratoire de Mécanique des Structures et des Systèmes Couplés du Conservatoire National des Arts et Métiers.], version: "Template 0.2.0"
 )
 
 = Introduction
@@ -57,21 +57,21 @@ Le modèle #cmd("pres-template") possède un certain nombre de paramètres perme
 
 		Outre le français, la seule langue prise en compte est l'anglais (`lang: "en"`).]
 
-		#argument("logo", default: "../images/logo_cnam.png", types: ("string","array"))[Chemin vers les logos pour la dispositive de titre.
+		#argument("logo", default: "images/logo_cnam_lmssc.png", types: ("string","array"))[Chemin vers les logos pour la dispositive de titre.
 			#wbox[
 				#set text(size: 11pt)
 
 				Il faut que le template soit à la racine du répertoire pour que le chemin soit correctement interprété. Dans le cas contraire, une erreur de compilation sera générée.
 			]
 
-		Pour utiliser plusieurs logos, il faut créer une liste de liens vers les images. \ Exemple -- `logo: ("../images/logo1.png", "../images/logo1.png")`.
+		Pour utiliser plusieurs logos, il faut créer une liste de liens vers les images. \ Exemple -- `logo: ("images/logo1.png", "images/logo1.png")`.
 		]
 
-		#argument("footer-logo", default: "../images/logo_cnam.png", types: "array")[Chemin vers le logo principal.]
+		#argument("footer-logo", default: "images/lecnam.png", types: "array")[Chemin vers le logo principal.]
 
-		#argument("body-font", default: "Noto Sans", types: "string")[Nom de la police de caractère du corps du texte.]
+		#argument("body-font", default: "Lato", types: "string")[Nom de la police de caractère du corps du texte.]
 
-		#argument("math-font", default: "Noto Sans Math", types: "string")[Nom de la police de caractère des équations mathématiques.]
+		#argument("math-font", default: "Lete Sans Math", types: "string")[Nom de la police de caractère des équations mathématiques.]
 
 		#ibox[
 		#set text(size: 11pt)
@@ -228,7 +228,9 @@ Le modèle de présentation Typst propose plusieurs fonctions complémentaires p
 		#align(center)[#line(stroke: 1pt + typst-color, length: 95%)]
 
 		$
-		#boxeq[$display(sum_(i=1)^n i = (n(n+1))/2)$]
+		#boxeq[$
+		sum_(i=1)^n i = (n(n+1))/2
+		$]
 		$
 	]
 
@@ -295,6 +297,7 @@ Le modèle de présentation Typst propose plusieurs fonctions complémentaires p
 		```
 	]
 
+#pagebreak()
 
 = Feuille de route
 

@@ -1,11 +1,11 @@
 #import "pres-template.typ": *
 
 // Titre - Facultatif - Peut être écrit directement dans le #title-slide
-#let title = [Filtres Bayésiens parcimonieux
+#let title = [Titre
 #v(-0.5em)
 #line(length: 15%, stroke: 0.075em + colors.red)
 #v(-0.5em)
-#text(size: 0.8em, [Application à l'identification d'effort])
+#text(size: 0.8em, [Sous-titre])
 ]
 
 // Laboratoire - Facultatif - Peut être écrit directement dans le #title-slide
@@ -15,13 +15,10 @@ Conservatoire National des Arts et Métiers
 ]
 
 // Auteur - Facultatif - Peut être écrit directement dans le #title-slide
-#let auteur = [#text(fill: colors.red, [Mathieu Aucejo]) #h(1em) Olivier De Smet]
+#let auteur = [#text(fill: colors.red, [Auteur A]) #h(1em) Auteur B]
 
 // Appel du thème
 #show: pres-template.with(
-  // aspect-ratio: "4-3",
-  // font: "New Computer Modern Sans",
-  // math-font: "New Computer Modern Math",
   lang: "fr",
 )
 
@@ -29,7 +26,7 @@ Conservatoire National des Arts et Métiers
 #title-slide(
   author: auteur,
   title: title,
-  short-title: "Filtres Bayésiens parcimonieux",
+  short-title: "Titre court",
   laboratory: labo,
 )
 
@@ -52,7 +49,8 @@ Conservatoire National des Arts et Métiers
   - #lorem(20)
 
   #link-box(<code-slide>, "Aller à la diapositive de code")
-] <first-slide>
+  <first-slide>
+]
 
 #slide(title: [Titre])[]
 
@@ -79,8 +77,8 @@ end
 ```
 ]
 
-#link-box(<first-slide>, "Retour à la première diapositive")
-] <code-slide>
+#link-box(<first-slide>, "Retour à la première diapositive")<code-slide>
+]
 
 #slide(title: [Titre])[]
 #slide(title: [Titre])[]
