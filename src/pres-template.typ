@@ -91,7 +91,7 @@
   }
 
   showybox(
-    title: box-title(color-svg("./images/icons/info.svg", colors.red, width: 1em), [#btitle]),
+    title: box-title(color-svg("assets/icons/info.svg", colors.red, width: 1em), [#btitle]),
     title-style: (
       color: colors.red,
       sep-thickness: 0pt,
@@ -121,7 +121,7 @@
   }
 
   showybox(
-    title: box-title(color-svg("./images/icons/light-bulb.svg", colors.green, width: 1em), [#btitle]),
+    title: box-title(color-svg("assets/icons/light-bulb.svg", colors.green, width: 1em), [#btitle]),
     title-style: (
       color: colors.green,
       sep-thickness: 0pt,
@@ -140,7 +140,7 @@
 #let important(body) = {
   set text(size: config.box-text-size)
   showybox(
-    title: box-title(color-svg("./images/icons/report.svg", colors.blue, width: 1em), [*Important*]),
+    title: box-title(color-svg("assets/icons/report.svg", colors.blue, width: 1em), [*Important*]),
     title-style: (
       color: colors.blue,
       sep-thickness: 0pt,
@@ -159,7 +159,7 @@
 #let question(body, type: none) = {
   set text(size: config.box-text-size)
   showybox(
-    title: box-title(color-svg("./images/icons/question.svg", colors.purple, width: 1em), [*Question*]),
+    title: box-title(color-svg("assets/icons/question.svg", colors.purple, width: 1em), [*Question*]),
     title-style: (
       color: colors.purple,
       sep-thickness: 0pt,
@@ -224,8 +224,8 @@
 #let pres-template(
   aspect-ratio: "16-9",
   lang: "fr",
-  logo: "images/logo_cnam_lmssc.png",
-  footer-logo: "images/lecnam.png",
+  logo: "assets/logo_cnam_lmssc.png",
+  footer-logo: "assets/lecnam.png",
   font: "Lato",
   math-font: "Lete Sans Math",
   body

@@ -1,0 +1,15 @@
+[package]
+name = "presentation_template"
+version = "0.2.0"
+authors = ["Mathieu Aucejo"]
+license = "MIT"
+description = "Modèle de présentation pour le Cnam"
+entrypoint = "src/pres-template.typ"
+categories = ["report"]
+repository = "https://github.com/maucejo/Cnam_presentation_template"
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+
+

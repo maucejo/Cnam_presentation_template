@@ -1,4 +1,4 @@
-#import "pres-template.typ": *
+#import "@preview/presentation_template:0.2.0": *
 
 // Titre - Facultatif - Peut être écrit directement dans le #title-slide
 #let title = [Titre

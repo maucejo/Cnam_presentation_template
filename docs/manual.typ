@@ -1,10 +1,11 @@
-#import "../pres-template.typ": *
+#import "@preview/presentation_template:0.2.0": *
 #import "./manual-template.typ": *
 
 #show: manual-template.with(
 	title: " Modèle de présentation Typst",
 	subtitle: "Présentations de type Beamer en Typst",
-	abstract : [Ce package Typst est une proposition de modèle de présentation de type Beamer en Typst pour les personnels du Laboratoire de Mécanique des Structures et des Systèmes Couplés du Conservatoire National des Arts et Métiers.], version: "Template 0.2.0"
+	abstract : [Ce package Typst est une proposition de modèle de présentation de type Beamer en Typst pour les personnels du Laboratoire de Mécanique des Structures et des Systèmes Couplés du Conservatoire National des Arts et Métiers.], version: "Template 0.2.0",
+	typst-version: "Typst 0.11.1"
 )
 
 = Introduction
@@ -57,7 +58,7 @@ Le modèle #cmd("pres-template") possède un certain nombre de paramètres perme
 
 		Outre le français, la seule langue prise en compte est l'anglais (`lang: "en"`).]
 
-		#argument("logo", default: "images/logo_cnam_lmssc.png", types: ("string","array"))[Chemin vers les logos pour la dispositive de titre.
+		#argument("logo", default: "assets/logo_cnam_lmssc.png", types: ("string","array"))[Chemin vers les logos pour la dispositive de titre.
 			#wbox[
 				#set text(size: 11pt)
 
@@ -67,7 +68,7 @@ Le modèle #cmd("pres-template") possède un certain nombre de paramètres perme
 		Pour utiliser plusieurs logos, il faut créer une liste de liens vers les images. \ Exemple -- `logo: ("images/logo1.png", "images/logo1.png")`.
 		]
 
-		#argument("footer-logo", default: "images/lecnam.png", types: "array")[Chemin vers le logo principal.]
+		#argument("footer-logo", default: "assets/lecnam.png", types: "array")[Chemin vers le logo principal.]
 
 		#argument("body-font", default: "Lato", types: "string")[Nom de la police de caractère du corps du texte.]
 
