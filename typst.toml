@@ -1,5 +1,5 @@
 [package]
-name = "presentation_template"
+name = "pres-template"
 version = "0.2.0"
 authors = ["Mathieu Aucejo"]
 license = "MIT"
