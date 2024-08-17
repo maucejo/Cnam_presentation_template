@@ -1,5 +1,5 @@
-#import "@preview/pres-template:0.2.1": *
-// #import "../src/pres-template.typ": *
+// #import "@preview/pres-template:0.2.1": *
+#import "../src/pres-template.typ": *
 
 // Titre - Facultatif - Peut être écrit directement dans le #title-slide
 #let title = [Titre
@@ -21,7 +21,6 @@ Conservatoire National des Arts et Métiers
 // Appel du thème
 #show: pres-template.with(
   lang: "fr",
-  logo: "../src/assets/logo-cnam_lmssc.png",
 )
 
 // Slide de titre
