@@ -208,7 +208,37 @@
   breakable: false
 )
 
-#let progress-bar = {
+#let slide-progress-bar = utils.polylux-progress( ratio => {
+  grid(
+    columns: (ratio * 100%, 1fr),
+    cell(fill: colors.red),
+    cell(fill: colors.gray.lighten(40%))
+  )
+})
+
+#let section-progress-bar = {
+  context{
+    let ratio = states.sec-count.at(here()).first()/states.sec-count.final().first()
+    grid(
+      columns: (ratio*100%, 1fr),
+      cell(fill: colors.red),
+      cell(fill: colors.gray.lighten(40%))
+    )
+  }
+}
+
+#let appendix-progress-bar = {
+  context{
+    let ratio = states.app-count.at(here()).first()/states.app-count.final().first()
+    grid(
+      columns: (ratio*100%, 1fr),
+      cell(fill: colors.red),
+      cell(fill: colors.gray.lighten(40%))
+    )
+  }
+}
+
+#let presentation-progress-bar = {
   context{
     let ratio = states.sec-count.at(here()).first()/states.sec-count.final().first()
     grid(
@@ -343,6 +373,8 @@
 
     set align(bottom + right)
     slide-counter
+
+    place(bottom, block(height: 2pt, width: 100%, spacing: 0pt, slide-progress-bar))
   }
 
   set page(
@@ -404,7 +436,7 @@
     set text(size: 1.5em)
     strong(name)
     v(-0.75em)
-    block(height: 2pt, width: 100%, spacing: 0pt, progress-bar)
+    block(height: 2pt, width: 100%, spacing: 0pt, section-progress-bar)
   }
 
   logic.polylux-slide(content)
@@ -438,9 +470,8 @@
 
     let slide-counter = context{
       pad(right: 2.5em, bottom: 2.25em, top: 0.25em,
-      box(stroke: 1.75pt + colors.red, radius: 5pt, inset: -0.5em,outset: 1.6em)[
-        #align(horizon)[#text(fill: colors.red, strong([A | #states.app-count.at(here()).first() / #states.app-count.final().first()]))]
-
+        box(stroke: 1.75pt + colors.red, radius: 5pt, inset: -0.5em,outset: 1.6em)[
+          #align(horizon)[#text(fill: colors.red, strong([A | #states.app-count.at(here()).first() / #states.app-count.final().first()]))]
         ]
       )
     }
@@ -462,6 +493,8 @@
 
     set align(bottom + right)
     slide-counter
+
+    place(bottom, block(height: 2pt, width: 100%, spacing: 0pt, appendix-progress-bar))
   }
 
     set page(
