@@ -53,7 +53,9 @@ Conservatoire National des Arts et Métiers
   <first-slide>
 ]
 
-#slide(title: [Titre])[]
+#slide(title: [Titre])[
+  #lorem(10)
+]
 
 #new-section-slide("Second section")
 
