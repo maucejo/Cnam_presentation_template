@@ -2,7 +2,7 @@
 #import "@preview/showybox:2.0.1": *
 #import "@preview/codelst:2.0.1": sourcecode
 
-//--------------------------- Configuration -----------------------------
+//---- Configuration ----
 
 // General parameters
 #let config = (
@@ -30,9 +30,9 @@
   sec-count: counter("sec-count"),          // Section counter
   app-count: counter("app-count"),          // Appendix counter
 )
-//-----------------------------------------------------------------------
+//----
 
-//--------------------------- Mathematics -------------------------------
+//---- Mathematics ----
 // Space for equations
 #let hs = sym.space.thin
 
@@ -46,9 +46,9 @@
     fill: colors.gray.lighten(80%),
   )[#body]
 }
-//-----------------------------------------------------------------------
+//----
 
-//------------------------ Utilities for boxes --------------------------
+//---- Utilities for boxes ----
 #let box-title(a, b) = {
   grid(columns: 2, column-gutter: 0.5em, align: (horizon),
     a,
@@ -73,9 +73,9 @@
   let data = colorize(read(path), color)
   return image.decode(data, ..args)
 }
-//-----------------------------------------------------------------------
+//----
 
-//--------------------------- Utility boxes -----------------------------
+//---- Utility boxes ----
 // Information box
 #let info(body) = {
   set text(size: config.box-text-size)
@@ -197,9 +197,9 @@
     #link(location, name)
   ]
 }
-//-----------------------------------------------------------------------
+//----
 
-//--------------------------- Progress bar ------------------------------
+//---- Progress bars ----
 #let cell = block.with(
   width: 100%,
   height: 100%,
@@ -248,9 +248,9 @@
     )
   }
 }
-//-----------------------------------------------------------------------
+//----
 
-//------------------------- Theme definition ----------------------------
+//---- Theme definition ----
 #let pres-template(
   aspect-ratio: "16-9",
   lang: "fr",
