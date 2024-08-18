@@ -466,15 +466,16 @@
       } else {
         strong("Appendices")
       }
-    }}
-
-    let slide-counter = context{
-      pad(right: 2.5em, bottom: 2.25em, top: 0.25em,
-        box(stroke: 1.75pt + colors.red, radius: 5pt, inset: -0.5em,outset: 1.6em)[
-          #align(horizon)[#text(fill: colors.red, strong([A | #states.app-count.at(here()).first() / #states.app-count.final().first()]))]
-        ]
-      )
     }
+  }
+
+  let slide-counter = context{
+    pad(right: 2.5em, bottom: 2.25em, top: 0.25em,
+      box(stroke: 1.75pt + colors.red, radius: 5pt, inset: -0.5em,outset: 1.6em)[
+        #align(horizon)[#text(fill: colors.red, strong([A | #states.app-count.at(here()).first() / #states.app-count.final().first()]))]
+      ]
+    )
+  }
 
   let footer = {
     set text(size: 0.8em)
@@ -497,13 +498,13 @@
     place(bottom, block(height: 2pt, width: 100%, spacing: 0pt, appendix-progress-bar))
   }
 
-    set page(
+  set page(
     header: header,
     footer: footer,
     margin: (top: 3em, bottom: 1em),
   )
 
-    let content = {
+  let content = {
     pad(left: 1em, bottom: -3em, text(fill: colors.red, size: 1.2em, strong(subtitle)))
 
     show: align.with(horizon)
