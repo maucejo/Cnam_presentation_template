@@ -282,7 +282,9 @@
 
   body
 }
+//----
 
+//---- Slide definition ----
 // Title slide
 #let title-slide(
   author: [Votre nom],
