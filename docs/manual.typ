@@ -70,6 +70,8 @@ Le modèle #cmd("pres-template") possède un certain nombre de paramètres perme
 			]
 		]
 
+		#colbreak()
+
 		#argument("author", types: ("string", "content"))[Auteurs de la présentation.
 
 		#example-box[
@@ -77,8 +79,6 @@ Le modèle #cmd("pres-template") possède un certain nombre de paramètres perme
 			#let author = [#text(fill: colors.red, [Author 1]) #h(1em) Author 2]
 			```
 		]]
-
-		#colbreak()
 
 		#argument("laboratory", types: ("string", "content"))[Nom du laboratoire de recherche.
 
