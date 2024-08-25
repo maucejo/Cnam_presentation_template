@@ -20,18 +20,14 @@ Conservatoire National des Arts et Métiers
 
 // Appel du thème
 #show: pres-template.with(
+  title: title,
+  author: auteur,
+  laboratory: labo,
   lang: "fr",
 )
 
 // Slide de titre
-#title-slide(
-  author: auteur,
-  title: title,
-  short-title: "Titre court",
-  laboratory: labo,
-)
-
-// #title-slide()
+#title-slide()
 
 // Slide pour le plan
 #content-slide()
@@ -82,9 +78,6 @@ end
 
 #link-box(<first-slide>, "Retour à la première diapositive")<code-slide>
 ]
-
-#slide(title: [Titre])[]
-#slide(title: [Titre])[]
 
 // Slide pour réveiller l'assistance
 #focus-slide[

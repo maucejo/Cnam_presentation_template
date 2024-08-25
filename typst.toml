@@ -1,6 +1,6 @@
 [package]
-name = "pres-template"
-version = "0.2.1"
+name = "presentation-template"
+version = "0.3.0"
 authors = ["Mathieu Aucejo"]
 license = "MIT"
 description = "Modèle de présentation pour le Cnam"
@@ -11,5 +11,3 @@ repository = "https://github.com/maucejo/Cnam_presentation_template"
 [template]
 path = "template"
 entrypoint = "main.typ"
-
-

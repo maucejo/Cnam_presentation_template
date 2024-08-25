@@ -23,12 +23,15 @@
 
 // State variables
 #let states = (
-  mlogo: state("mlogo", []),                 // Main logo
-  flogo: state("flogo", []),                // Footer logo
+  title: state("title", []),                // Title
   stitle: state("stitle", []),              // Short title
-  plang: state("lang", "fr"),               // Language
+  author: state("author", []),              // Author
+  labo: state("academic-program", []),
+  mlogo: state("mlogo", []),                // Main logo
+  flogo: state("flogo", []),                // Footer logo
   sec-count: counter("sec-count"),          // Section counter
   app-count: counter("app-count"),          // Appendix counter
+  localization: state("localization", []),
 )
 //----
 
@@ -81,17 +84,13 @@
   set text(size: config.box-text-size)
   let btitle = {
     context{
-      let lang = states.plang.at(here())
-      if lang == "fr" {
-        strong("Remarque")
-      } else {
-        strong("Note")
-      }
+      let localization = states.localization.at(here())
+      strong(localization.info)
     }
   }
 
   showybox(
-    title: box-title(color-svg("assets/icons/info.svg", colors.red, width: 1em), [#btitle]),
+    title: box-title(color-svg("../resources/assets/icons/info.svg", colors.red, width: 1em), [#btitle]),
     title-style: (
       color: colors.red,
       sep-thickness: 0pt,
@@ -111,17 +110,13 @@
   set text(size: config.box-text-size)
   let btitle = {
     context{
-      let lang = states.plang.at(here())
-      if lang == "fr" {
-        strong("Astuce")
-      } else {
-        strong("Tip")
-      }
+      let localization = states.localization.at(here())
+      strong(localization.tip)
     }
   }
 
   showybox(
-    title: box-title(color-svg("assets/icons/light-bulb.svg", colors.green, width: 1em), [#btitle]),
+    title: box-title(color-svg("../resources/assets/icons/light-bulb.svg", colors.green, width: 1em), [#btitle]),
     title-style: (
       color: colors.green,
       sep-thickness: 0pt,
@@ -140,7 +135,7 @@
 #let important(body) = {
   set text(size: config.box-text-size)
   showybox(
-    title: box-title(color-svg("assets/icons/report.svg", colors.blue, width: 1em), [*Important*]),
+    title: box-title(color-svg("../resources/assets/icons/report.svg", colors.blue, width: 1em), [*Important*]),
     title-style: (
       color: colors.blue,
       sep-thickness: 0pt,
@@ -159,7 +154,7 @@
 #let question(body, type: none) = {
   set text(size: config.box-text-size)
   showybox(
-    title: box-title(color-svg("assets/icons/question.svg", colors.purple, width: 1em), [*Question*]),
+    title: box-title(color-svg("../resources/assets/icons/question.svg", colors.purple, width: 1em), [*Question*]),
     title-style: (
       color: colors.purple,
       sep-thickness: 0pt,
@@ -253,9 +248,13 @@
 //---- Theme definition ----
 #let pres-template(
   aspect-ratio: "16-9",
+  title: [Title],
+  short-title: "",
+  author: none,
+  laboratory: "",
   lang: "fr",
-  logo: "assets/logo_cnam_lmssc.png",
-  footer-logo: "assets/lecnam.png",
+  logo: image("../resources/assets/logo_cnam_lmssc.png"),
+  footer-logo: image("../resources/assets/lecnam.png"),
   font: "Lato",
   math-font: "Lete Sans Math",
   body
@@ -272,49 +271,59 @@
     fill: colors.gray.lighten(95%),
   )
 
+  // localization
+  let localization = json("../resources/i18n/fr.json")
+  if lang == "en" {
+      localization = json("../resources/i18n/en.json")
+  }
+
   show math.equation: set text(font: math-font, weight: config.weight, stylistic-set: 1)
   set list(marker: ([#text(fill:colors.red)[#sym.bullet]], [#text(fill:colors.red)[#sym.triangle.filled.small.r]]))
   set enum(numbering: n => text(fill:colors.red)[#n.])
 
   states.mlogo.update(logo)
   states.flogo.update(footer-logo)
-  states.plang.update(lang)
+  states.title.update(title)
+  states.stitle.update(short-title)
+  states.author.update(author)
+  states.labo.update(laboratory)
+  states.localization.update(localization)
 
   body
 }
 //----
 
 //---- Slide definition ----
-// Title slide
 #let title-slide(
-  author: [Votre nom],
-  laboratory: [Laboratoire de recherche],
-  title: [Titre de la présentation],
-  short-title: [Titre court]
+
 ) = {
-  let content = {
+  let content = context{
     set text(config.text-size)
     set align(center + horizon)
 
+    let logo = states.mlogo.at(here())
+    let title = states.title.at(here())
+    let author = states.author.at(here())
+    let labo = states.labo.at(here())
+
     block(width: 100%, inset: 2cm,
     {
-      context{
-        let logo = states.mlogo.at(here())
-        if type(logo) == type("string") {
-          set align(top + right)
-          v(-2.5em)
-          image(logo, height: config.logo-height)
-        } else if logo == none {
-          v(2em)
-        } else {
-          v(-2.5em)
-          grid(
-            columns: logo.len(),
-            column-gutter: 1fr,
-            ..logo.map((logos) => (align(center + horizon, image(logos, height: config.logo-height))))
-          )
-        }
+      set image(height: config.logo-height)
+      if type(logo) == "content" {
+        set align(top + right)
+        v(-2.5em)
+        logo
+      } else if logo == none {
+        v(2em)
+      } else {
+        v(-2.5em)
+        grid(
+          columns: logo.len(),
+          column-gutter: 1fr,
+          ..logo.map((logos) => (align(center + horizon, logos)))
+        )
       }
+
 
       v(1em)
       line(length: 100%, stroke: 0.15em + colors.red)
@@ -326,15 +335,14 @@
         set text(size: 1em)
         block(spacing: 1em, strong(author, delta: 250))
       }
-      if laboratory != none {
+      if labo != none {
         set text(size: 0.85em)
-        block(spacing: 1em, laboratory)
+        block(spacing: 1em, labo)
         v(1em)
       }
     })
   }
   logic.polylux-slide(content)
-  states.stitle.update(short-title)
   logic.logical-slide.update(i => i - 1)
 }
 
@@ -364,7 +372,8 @@
       let logo = states.flogo.at(here())
       let title = states.stitle.at(here())
       v(-1.55em)
-      pad(left: 1em, image(logo, height: 200%))
+      set image(height: 200%)
+      pad(left: 1em, logo)
 
       if title != none {
         set align(horizon + center)
@@ -408,12 +417,8 @@
     set text(fill: white, size: 1.2em)
     set strong(delta: 300)
     context{
-      let lang = states.plang.at(here())
-      if lang == "fr" {
-        strong("Sommaire")
-      } else {
-        strong("Outline")
-      }
+      let localization = states.localization.at(here())
+      strong(localization.outline)
     }
   }
 
@@ -462,12 +467,8 @@
     set align(horizon)
     set text(fill: white, size: 1.2em)
     context{
-      let lang = states.plang.at(here())
-      if lang == "fr" {
-        strong("Annexes")
-      } else {
-        strong("Appendices")
-      }
+      let localization = states.localization.at(here())
+      strong(localization.appendix)
     }
   }
 
@@ -485,7 +486,8 @@
       let logo = states.flogo.at(here())
       let title = states.stitle.at(here())
       v(-1.55em)
-      pad(left: 1em, image(logo, height: 200%))
+      set image(height: 200%)
+      pad(left: 1em, logo)
 
       if title != none {
         set align(bottom + center)

@@ -1,10 +1,10 @@
-#import "@preview/presentation_template:0.2.0": *
+#import "@preview/presentation-template:0.3.0": *
 #import "./manual-template.typ": *
 
 #show: manual-template.with(
 	title: " Modèle de présentation Typst",
 	subtitle: "Présentations de type Beamer en Typst",
-	abstract : [Ce package Typst est une proposition de modèle de présentation de type Beamer en Typst pour les personnels du Laboratoire de Mécanique des Structures et des Systèmes Couplés du Conservatoire National des Arts et Métiers.], version: "Template 0.2.0",
+	abstract : [Ce package Typst est une proposition de modèle de présentation de type Beamer en Typst pour les personnels du Laboratoire de Mécanique des Structures et des Systèmes Couplés du Conservatoire National des Arts et Métiers.], version: "Template 0.3.0",
 	typst-version: "Typst 0.11.1"
 )
 
@@ -46,29 +46,68 @@ Le modèle #cmd("pres-template") possède un certain nombre de paramètres perme
 
 #command("pres-template", ..args(
 	aspect-ratio: "16-9",
+  title: [Title],
+  short-title: "",
+  author: none,
+  laboratory: "",
   lang: "fr",
-  logo: "../images/logo_cnam.png",
-  footer-logo: "../images/logo_cnam.png",
-  font: "Noto Sans",
-  math-font: "Noto Sans Math",
+  logo: image("../resources/assets/logo_cnam_lmssc.png"),
+  footer-logo: image("../resources/assets/lecnam.png"),
+  font: "Lato",
+  math-font: "Lete Sans Math",
 	[body]))[
 		#argument("aspect-ratio", default: "16-9", types: "string")[Rapport d'aspect de la présentation. Autre format disponible : `"4-3"`.]
+
+		#argument("title", types: ("string", "content"))[Titre de la présentation.
+
+			#example-box[
+				```typ
+				#let title = [Title \
+					#line(length: 15%, stroke: 0.075em + red) \
+					#text([Subtitle], size: 0.8em)
+				]
+				```
+			]
+		]
+
+		#argument("author", types: ("string", "content"))[Auteurs de la présentation.
+
+		#example-box[
+			```typ
+			#let author = [#text(fill: colors.red, [Author 1]) #h(1em) Author 2]
+			```
+		]]
+
+		#colbreak()
+
+		#argument("laboratory", types: ("string", "content"))[Nom du laboratoire de recherche.
+
+			#example-box[
+					```typ
+					#let laboratory = [Laboratoire de Mécanique des Structures et des Systèmes Couplés \
+					Conservatoire National des Arts et Métiers
+					]
+					```
+			]
+		]
+
+		#argument("short-title", types: "string")[Titre court de la présentation.]
 
 		#argument("lang", default: "fr", types: "string")[Langue du document. En fonction de la valeur prise par ce paramètre, la localisation  du document sera adaptée.
 
 		Outre le français, la seule langue prise en compte est l'anglais (`lang: "en"`).]
 
-		#argument("logo", default: "assets/logo_cnam_lmssc.png", types: ("string","array"))[Chemin vers les logos pour la dispositive de titre.
+		#argument("logo", default: [#image("../resources/assets/logo_cnam_lmssc.png")], types: ("content","array"))[Chemin vers les logos pour la dispositive de titre.
 			#wbox[
 				#set text(size: 11pt)
 
 				Il faut que le template soit à la racine du répertoire pour que le chemin soit correctement interprété. Dans le cas contraire, une erreur de compilation sera générée.
 			]
 
-		Pour utiliser plusieurs logos, il faut créer une liste de liens vers les images. \ Exemple -- `logo: ("images/logo1.png", "images/logo1.png")`.
+		Pour utiliser plusieurs logos, il faut créer une liste de liens vers les images. \ Exemple -- `logo: (image("logo1.png"), image("logo2.png"))`.
 		]
 
-		#argument("footer-logo", default: "assets/lecnam.png", types: "array")[Chemin vers le logo principal.]
+		#argument("footer-logo", default: [#image("../resources/assets/lecnam.png")], types: "content")[Chemin vers le logo principal.]
 
 		#argument("body-font", default: "Lato", types: "string")[Nom de la police de caractère du corps du texte.]
 
@@ -89,7 +128,7 @@ D'une manière générale, le fichier contenant votre présentation est structur
 #codesnippet[
 	```typ
 	// Diapositive de titre
-	#title-slide(...)
+	#title-slide()
 
 	// Sommaire
 	#content-slide()
@@ -118,46 +157,7 @@ Le contenu de la présentation est structuré grâce à six types de diapositves
 
 === Diapostive de titre
 
-La diapsitive de titre est définie par la foction #cmd("title-slide") qui dispose d'un certain nombre de paramètres permettant de personnaliser la diapositive. Voici la liste des paramètres disponibles :
-
-#command("title-slide", ..args(
-	author: "Votre nom",
-  laboratory: "Laboratoire de recherche",
-	title: "Titre de la présentation",
-	short-title: "Titre court",
-	[body]))[
-		#argument("author", types: ("string", "content"))[Auteurs de la présentation.
-
-		#example-box[
-			```typ
-			#let author = [#text(fill: colors.red, [Author 1]) #h(1em) Author 2]
-			```
-		]]
-
-		#argument("laboratory", types: ("string", "content"))[Nom du laboratoire de recherche.
-
-		#example-box[
-				```typ
-				#let laboratory = [Laboratoire de Mécanique des Structures et des Systèmes Couplés \
-				Conservatoire National des Arts et Métiers
-				]
-				```
-		]]
-
-		#argument("title", types: ("string", "content"))[Titre de la présentation.
-
-		#example-box[
-			```typ
-			#let title = [Titre \
-				#line(length: 15%, stroke: 0.075em + red) \
-				#text([Sous-titre], size: 0.8em)
-			]
-			```
-		]]
-
-		#argument("short-title", types: "string")[Titre court de la présentation.]
-	]
-
+Pour créer une diapositive de titre, il faut insérer la commande #cmd("title-slide") dans votre fichier de présentation `typ`.
 #figure(
 	image("manual-images/slide-title.png", width: 60%),
 	caption: [Exemple de diapositive de titre]
@@ -228,11 +228,9 @@ Le modèle de présentation Typst propose plusieurs fonctions complémentaires p
 
 		#align(center)[#line(stroke: 1pt + typst-color, length: 95%)]
 
-		$
 		#boxeq[$
 		sum_(i=1)^n i = (n(n+1))/2
 		$]
-		$
 	]
 
 - Boîtes permettant de mettre en avant des informations importantes dans votre présentation.
@@ -251,6 +249,8 @@ Le modèle de présentation Typst propose plusieurs fonctions complémentaires p
 		```
 
 		#align(center)[#line(stroke: 1pt + typst-color, length: 95%)]
+		#let localization = json("../resources/i18n/fr.json")
+		#states.localization.update(localization)
 
 		#info[#lorem(10)]
 		#tip[#lorem(10)]
