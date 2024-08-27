@@ -26,25 +26,25 @@ Pour utiliser le modèle, il faut l'importer dans votre fichier principal `typ` 
 
 #codesnippet[
 	```typ
-	#import "./template/pres-template.typ": *
+	#import "../src/presentation-template.typ": *
 	```
 ]
 
 == Initilisation du modèle
 
-Après avoir importé le modèle, celui doit être initialisé en appliquant une règle d'affichage (`show` rule) avec la commande #cmd("pres-template") en passant les options nécessaires avec l'instruction `with` dans votre fichier principal `typ` :
+Après avoir importé le modèle, celui doit être initialisé en appliquant une règle d'affichage (`show` rule) avec la commande #cmd("presentation") en passant les options nécessaires avec l'instruction `with` dans votre fichier principal `typ` :
 
 #codesnippet(
 	```typ
-	#show pres-template.with(
+	#show presentation.with(
 	  ...
 	)
 	```
 )
 
-Le modèle #cmd("pres-template") possède un certain nombre de paramètres permettant de personnaliser le document. Voici la liste des paramètres disponibles :
+Le modèle #cmd("presentation") possède un certain nombre de paramètres permettant de personnaliser le document. Voici la liste des paramètres disponibles :
 
-#command("pres-template", ..args(
+#command("presentation", ..args(
 	aspect-ratio: "16-9",
   title: [Title],
   short-title: "",
