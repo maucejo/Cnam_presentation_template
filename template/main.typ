@@ -27,7 +27,7 @@ Conservatoire National des Arts et Métiers
 )
 
 // Slide de titre
-#title-slide()
+#title-slide
 
 // Slide pour le plan
 #content-slide()
@@ -38,8 +38,8 @@ Conservatoire National des Arts et Métiers
 #slide(title: [Titre de la diapositive], subtitle: "Un sous-titre")[
   #boxeq[
   $
-  bold(z)_(k + 1) = bold(A) hs bold(z)_k + bold(B) hs bold(u)_k + bold(w)_k \
-  bold(y)_k = bold(C) hs bold(z)_k + bold(v)_k
+  bold(z)_(k + 1) = bold(A) bold(z)_k + bold(B) bold(u)_k + bold(w)_k \
+  bold(y)_k = bold(C) bold(z)_k + bold(v)_k
   $
   ]
 
