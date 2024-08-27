@@ -2,7 +2,7 @@
 #import "_boxes.typ": *
 #import "_slides.typ": *
 
-#let pres-template(
+#let presentation(
   aspect-ratio: "16-9",
   title: [Title],
   short-title: "",

@@ -1,5 +1,5 @@
 #import "@preview/presentation-template:0.3.0": *
-// #import "../src/pres-template.typ": *
+#import "../src/presentation-template.typ": *
 
 // Titre - Facultatif - Peut être écrit directement dans le #title-slide
 #let title = [Titre
@@ -19,7 +19,7 @@ Conservatoire National des Arts et Métiers
 #let auteur = [#text(fill: colors.red, [Auteur A]) #h(1em) Auteur B]
 
 // Appel du thème
-#show: pres-template.with(
+#show: presentation.with(
   title: title,
   author: auteur,
   laboratory: labo,
