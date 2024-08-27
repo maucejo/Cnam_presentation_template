@@ -1,7 +1,5 @@
 #import "@preview/polylux:0.3.1": *
 #import "_boxes.typ": *
-#import "_config.typ": *
-#import "_progress-bars.typ": *
 #import "_slides.typ": *
 
 #let pres-template(
