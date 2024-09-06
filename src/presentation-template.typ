@@ -9,8 +9,8 @@
   author: none,
   laboratory: "",
   lang: "fr",
-  logo: image("../resources/assets/logo_cnam_lmssc.png"),
-  footer-logo: image("../resources/assets/lecnam.png"),
+  logo: image("resources/assets/logo_cnam_lmssc.png"),
+  footer-logo: image("resources/assets/lecnam.png"),
   font: "Lato",
   math-font: "Lete Sans Math",
   body
@@ -28,9 +28,9 @@
   )
 
   // localization
-  let localization = json("../resources/i18n/fr.json")
+  let localization = json("resources/i18n/fr.json")
   if lang == "en" {
-      localization = json("../resources/i18n/en.json")
+      localization = json("resources/i18n/en.json")
   }
 
   show math.equation: set text(font: math-font, weight: config.weight, stylistic-set: 1)
